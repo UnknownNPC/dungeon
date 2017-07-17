@@ -10,7 +10,7 @@
 *.iml
 *.ipr
 *.iws
-src/META-INF/
+*/src/META-INF/
 out/
 
 # Allow the project's dictionary.
