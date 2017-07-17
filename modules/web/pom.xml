@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mafagafogigante.dungeon</groupId>
+        <artifactId>parent</artifactId>
+        <version>v0.0.1</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <packaging>jar</packaging>
+    <name>Dungeon Java Web</name>
+    <description>Text-based open-world RPG Java Web Module</description>
+    <url>https://github.com/mafagafogigante/dungeon</url>
+
+    <artifactId>web</artifactId>
+    <version>v0.0.1</version>
+
+</project>
