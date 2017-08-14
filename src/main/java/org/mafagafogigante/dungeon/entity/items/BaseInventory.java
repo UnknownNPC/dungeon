@@ -6,7 +6,9 @@ import org.mafagafogigante.dungeon.io.Version;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The abstract BaseInventory class all inventories inherit from.
@@ -59,12 +61,23 @@ public abstract class BaseInventory implements Serializable {
   /**
    * Iterates through the inventory, removing items that shouldn't exist anymore.
    */
-  public void refreshItems() {
+  public Map<Item, ItemDeleteStatus> refreshItems() {
+    Map<Item, ItemDeleteStatus> itemDeleteStatusMap = new HashMap<>();
     for (Item item : new ArrayList<>(items)) {
       if (isDecomposed(item)) {
         removeItem(item);
+        if (item.hasTag(Tag.FOOD)) {
+          itemDeleteStatusMap.put(item, ItemDeleteStatus.DECAYED);
+        } else if (item.hasTag(Tag.WEAPON)) {
+          itemDeleteStatusMap.put(item, ItemDeleteStatus.DECOMPOSED);
+        }
       }
     }
+    return itemDeleteStatusMap;
+  }
+
+  public enum ItemDeleteStatus {
+    DECAYED, DECOMPOSED
   }
 
 }

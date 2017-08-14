@@ -4,10 +4,12 @@ import org.mafagafogigante.dungeon.entity.Entity;
 import org.mafagafogigante.dungeon.entity.Luminosity;
 import org.mafagafogigante.dungeon.entity.TagSet;
 import org.mafagafogigante.dungeon.entity.creatures.Creature;
+import org.mafagafogigante.dungeon.entity.items.BaseInventory.ItemDeleteStatus;
 import org.mafagafogigante.dungeon.entity.items.Item;
 import org.mafagafogigante.dungeon.entity.items.ItemFactory;
 import org.mafagafogigante.dungeon.entity.items.LocationInventory;
 import org.mafagafogigante.dungeon.io.Version;
+import org.mafagafogigante.dungeon.io.Writer;
 import org.mafagafogigante.dungeon.util.Percentage;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -202,7 +205,10 @@ public class Location implements Serializable {
    * location.
    */
   void refreshItems() {
-    getInventory().refreshItems();
+    Map<Item, ItemDeleteStatus> itemDeleteStatusMap = getInventory().refreshItems();
+    for (Map.Entry<Item, ItemDeleteStatus> removedItem : itemDeleteStatusMap.entrySet()) {
+      Writer.write("Item " + removedItem.getKey().getName().getSingular() + " was removed because: " + removedItem.getValue());
+    }
     for (Creature creature : creatures) {
       creature.getInventory().refreshItems();
     }
